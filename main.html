@@ -2,672 +2,772 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>MAYA-XMD</title>
-  <!-- Google Fonts & Font Awesome -->
+  <title>MAYA-XMD | Pink Edition ✧</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Exo+2:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       min-height: 100vh;
-      background: #0a0312;  /* deep dark base for pink vibrancy */
-      background-image: radial-gradient(circle at 20% 30%, rgba(255, 20, 147, 0.08) 0%, #0a0312 80%);
+      margin: 0;
+      background-color: #0a0312;
+      background-image: radial-gradient(circle at 20% 30%, rgba(255, 20, 147, 0.12) 0%, #0a0312 90%);
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
       font-family: 'Exo 2', sans-serif;
       color: #ffeef8;
       overflow-x: hidden;
-      position: relative;
     }
 
-    /* PINK ENERGY BACKGROUND LAYER */
-    .pink-haze {
+    .bg-overlay {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(10, 3, 18, 0.75);
       z-index: 0;
-      pointer-events: none;
-      background: 
-        radial-gradient(circle at 10% 20%, rgba(255, 105, 180, 0.25) 0%, transparent 45%),
-        radial-gradient(circle at 85% 70%, rgba(255, 20, 147, 0.3) 0%, transparent 55%),
-        radial-gradient(circle at 40% 90%, rgba(219, 112, 147, 0.2) 0%, transparent 50%);
-      animation: hazeShift 16s infinite alternate;
     }
 
-    @keyframes hazeShift {
-      0% { opacity: 0.7; transform: scale(1);}
-      100% { opacity: 1; transform: scale(1.05);}
-    }
-
-    .glow-pink-bubbles {
+    .particle-canvas {
       position: fixed;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+    }
+
+    .glowing-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       z-index: 0;
       overflow: hidden;
     }
 
-    .bubble {
+    .glow-circle {
       position: absolute;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 105, 180, 0.4), rgba(255, 20, 147, 0.1));
-      filter: blur(45px);
-      animation: floatBubble 22s infinite ease-in-out;
+      filter: blur(80px);
+      opacity: 0.5;
+      animation: float 20s infinite ease-in-out;
     }
 
-    .bubble:nth-child(1) { width: 500px; height: 500px; top: -15%; left: -10%; animation-duration: 28s; background: radial-gradient(circle, #ff69b4, #ff1493); opacity: 0.2; }
-    .bubble:nth-child(2) { width: 650px; height: 650px; bottom: -20%; right: -15%; animation-duration: 35s; background: radial-gradient(circle, #ff99cc, #ff3388); opacity: 0.18; }
-    .bubble:nth-child(3) { width: 400px; height: 400px; top: 40%; left: 30%; animation-duration: 25s; background: radial-gradient(circle, #ff66b2, #e60073); opacity: 0.2; }
-    .bubble:nth-child(4) { width: 350px; height: 350px; bottom: 10%; left: 20%; animation-duration: 32s; background: radial-gradient(circle, #ffb6c1, #ff1493); opacity: 0.15; }
-    .bubble:nth-child(5) { width: 280px; height: 280px; top: 10%; right: 5%; animation-duration: 20s; background: radial-gradient(circle, #ff85b3, #ff3399); opacity: 0.25; }
+    .glow-circle:nth-child(1) {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(255, 105, 180, 0.7) 0%, transparent 70%);
+      top: -10%; left: -5%;
+      animation-duration: 25s;
+    }
 
-    @keyframes floatBubble {
+    .glow-circle:nth-child(2) {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(255, 20, 147, 0.6) 0%, transparent 70%);
+      top: 50%; right: -10%;
+      animation-duration: 30s; animation-delay: 3s;
+    }
+
+    .glow-circle:nth-child(3) {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(219, 112, 147, 0.5) 0%, transparent 70%);
+      bottom: -5%; left: 30%;
+      animation-duration: 22s; animation-delay: 7s;
+    }
+
+    .glow-circle:nth-child(4) {
+      width: 350px; height: 350px;
+      background: radial-gradient(circle, rgba(255, 182, 193, 0.4) 0%, transparent 70%);
+      top: 30%; left: 50%;
+      animation-duration: 28s; animation-delay: 12s;
+    }
+
+    @keyframes float {
       0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(35px, -45px) scale(1.08); }
-      66% { transform: translate(-25px, 50px) scale(0.95); }
+      25% { transform: translate(40px, 50px) scale(1.1); }
+      50% { transform: translate(-30px, 70px) scale(0.95); }
+      75% { transform: translate(50px, -40px) scale(1.05); }
     }
 
-    /* scanlines + glam effect */
-    .glam-overlay {
+    .scan-lines {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: repeating-linear-gradient(0deg, rgba(255, 192, 203, 0.02) 0px, rgba(255, 192, 203, 0.02) 2px, transparent 2px, transparent 6px);
-      pointer-events: none;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 2px,
+        rgba(255, 105, 180, 0.03) 2px,
+        rgba(255, 105, 180, 0.03) 4px
+      );
       z-index: 1;
+      pointer-events: none;
     }
 
-    .page-container {
+    .page-wrapper {
       position: relative;
-      z-index: 3;
-      max-width: 1300px;
-      margin: 0 auto;
-      padding: 2rem 1.5rem 3rem;
+      z-index: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
+      min-height: 100vh;
+      padding: 2rem 1rem;
       gap: 2rem;
     }
 
-    /* HERO STYLISH PINK */
-    .hero-glow {
-      text-align: center;
-      width: 100%;
-      margin-top: 1rem;
-    }
-
-    .maya-badge {
-      display: inline-block;
-      background: rgba(255, 105, 180, 0.15);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 105, 180, 0.5);
-      border-radius: 100px;
-      padding: 0.5rem 1.5rem;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 2px;
-      margin-bottom: 1.5rem;
-      color: #ffb7d2;
-      box-shadow: 0 0 12px rgba(255, 105, 180, 0.3);
-    }
-
-    .main-title {
-      font-family: 'Orbitron', 'Playfair Display', monospace;
-      font-size: 4.2rem;
-      font-weight: 900;
-      background: linear-gradient(135deg, #FFB7C5 0%, #FF69B4 35%, #FF1493 70%, #FF85B3 100%);
-      background-size: 300% auto;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      letter-spacing: 4px;
-      text-shadow: 0 0 25px rgba(255, 20, 147, 0.5);
-      animation: titlePulse 2.5s infinite alternate, gradientFlow 6s ease infinite;
-      margin-bottom: 0.5rem;
-    }
-
-    @keyframes titlePulse {
-      0% { text-shadow: 0 0 10px #ff69b4; }
-      100% { text-shadow: 0 0 30px #ff1493, 0 0 8px #ffb6c1; }
-    }
-    @keyframes gradientFlow {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 100% 50%; }
-    }
-
-    .sub-glow {
-      font-size: 1.25rem;
-      font-weight: 300;
-      letter-spacing: 5px;
-      color: #ffc0e0;
-      text-transform: uppercase;
-      background: linear-gradient(120deg, #ffb7c5, #ff69b4);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 1.2rem;
-    }
-
-    .status-ring {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      background: rgba(255, 20, 147, 0.2);
-      border: 1px solid #ff69b4;
-      border-radius: 60px;
-      padding: 0.5rem 1.6rem;
-      font-size: 0.8rem;
-      font-weight: 600;
-      backdrop-filter: blur(8px);
-    }
-    .status-dot-pink {
-      width: 10px;
-      height: 10px;
-      background: #ff69b4;
-      border-radius: 50%;
-      box-shadow: 0 0 12px #ff1493;
-      animation: pulsePink 1.6s infinite;
-    }
-    @keyframes pulsePink {
-      0% { opacity: 0.4; transform: scale(0.8); box-shadow: 0 0 0 0 #ff69b4; }
-      100% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 0 8px rgba(255, 105, 180, 0); }
-    }
-
-    /* STATS GRID PINK THEME */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
-      width: 100%;
-      max-width: 1100px;
-      margin-top: 1rem;
-    }
-    .stat-card-pink {
-      background: rgba(25, 5, 35, 0.65);
-      backdrop-filter: blur(12px);
-      border-radius: 28px;
-      border: 1px solid rgba(255, 105, 180, 0.4);
-      padding: 1.5rem 1rem;
-      text-align: center;
-      transition: all 0.3s ease;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    }
-    .stat-card-pink:hover {
-      transform: translateY(-8px);
-      border-color: #ff69b4;
-      box-shadow: 0 18px 35px rgba(255, 105, 180, 0.25), 0 0 18px #ff69b4;
-    }
-    .stat-icon-pink {
-      font-size: 2rem;
-      background: linear-gradient(145deg, #ffb3d9, #ff3388);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 0.8rem;
-    }
-    .stat-number {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 2rem;
-      font-weight: 800;
-      color: #ffc0e4;
-      letter-spacing: 1px;
-    }
-    .stat-label {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: #ffafcf;
-      font-weight: 500;
-    }
-
-    /* MAIN CARD */
-    .glass-panel {
-      background: rgba(15, 5, 25, 0.7);
-      backdrop-filter: blur(16px);
-      border-radius: 2rem;
-      border: 1px solid rgba(255, 105, 180, 0.4);
-      width: 100%;
-      max-width: 1100px;
-      padding: 2rem 2rem;
-      transition: all 0.2s;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    }
-    .section-head {
-      font-family: 'Orbitron', monospace;
-      font-size: 1.4rem;
-      text-align: center;
-      margin-bottom: 2rem;
-      background: linear-gradient(120deg, #ffb7c5, #ff69b4);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      letter-spacing: 3px;
-    }
-
-    .action-panel {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1.8rem;
-    }
-    .xmd-btn {
-      flex: 1;
-      min-width: 200px;
-      background: rgba(0, 0, 0, 0.45);
-      border: 1px solid #ff69b4;
-      border-radius: 2rem;
-      padding: 1.6rem 1rem;
+    .hero-section {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.7rem;
-      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-      text-decoration: none;
-      color: inherit;
-      cursor: pointer;
-      backdrop-filter: blur(6px);
-    }
-    .xmd-btn:hover {
-      transform: translateY(-8px) scale(1.02);
-      border-color: #ff85c2;
-      background: rgba(255, 105, 180, 0.12);
-      box-shadow: 0 20px 30px -10px rgba(255, 20, 147, 0.4), 0 0 30px rgba(255, 105, 180, 0.2);
-    }
-    .btn-circle {
-      width: 65px;
-      height: 65px;
-      background: linear-gradient(145deg, #ff3388, #ff69b4);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 18px #ff1493;
-    }
-    .btn-circle i {
-      font-size: 1.8rem;
-      color: #fff0f5;
-    }
-    .btn-label {
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 800;
-      font-size: 1rem;
-      letter-spacing: 1.5px;
-      color: #ffd9e6;
-    }
-    .btn-desc {
-      font-size: 0.75rem;
-      color: #ffb7d0;
+      text-align: center;
+      padding: 3rem 2rem 2rem;
+      width: 100%;
+      max-width: 900px;
     }
 
-    /* deploy section (hosting links) */
-    .deploy-special {
-      width: 100%;
-      max-width: 1100px;
-      margin-top: 0.5rem;
+    .logo-container {
+      position: relative;
+      margin-bottom: 1.5rem;
     }
-    .deploy-grid-pink {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1rem;
-    }
-    .deploy-item {
-      background: rgba(30, 12, 40, 0.6);
-      backdrop-filter: blur(12px);
-      border-radius: 1.5rem;
-      border: 1px solid rgba(255, 105, 180, 0.3);
-      padding: 0.9rem 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      transition: all 0.2s;
-      text-decoration: none;
-    }
-    .deploy-item:hover {
-      border-color: #ff69b4;
-      background: rgba(255, 105, 180, 0.1);
-      transform: translateX(6px);
-    }
-    .deploy-icon {
-      width: 48px;
-      height: 48px;
-      background: linear-gradient(145deg, #ff66aa, #d61a73);
-      border-radius: 20px;
+
+    .logo-ring {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      background: linear-gradient(#0a0312, #0a0312) padding-box,
+                  linear-gradient(135deg, #ff69b4, #ff1493, #ff85b3) border-box;
       display: flex;
       align-items: center;
       justify-content: center;
+      animation: ringRotate 6s linear infinite;
+      position: relative;
     }
-    .deploy-icon i {
-      font-size: 1.6rem;
-      color: white;
+
+    .logo-ring::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      background: linear-gradient(#0a0312, #0a0312) padding-box,
+                  linear-gradient(135deg, #ff85b3, #ff69b4, #ff1493) border-box;
+      animation: ringRotate 6s linear infinite reverse;
     }
-    .deploy-text {
-      flex: 1;
+
+    @keyframes ringRotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
-    .deploy-title {
-      font-weight: 800;
-      font-size: 0.9rem;
-      color: #ffc0e0;
+
+    .logo-icon {
+      font-size: 3rem;
+      background: linear-gradient(135deg, #ff69b4, #ff1493);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      z-index: 1;
+    }
+
+    .title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      background: linear-gradient(135deg, #ffb7c5 0%, #ff69b4 50%, #ff1493 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+      animation: titleGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes titleGlow {
+      0% { filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.4)); }
+      100% { filter: drop-shadow(0 0 20px rgba(255, 20, 147, 0.6)); }
+    }
+
+    .tagline {
+      font-size: 1.1rem;
+      color: rgba(255, 220, 240, 0.7);
+      font-weight: 300;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: rgba(255, 105, 180, 0.12);
+      border: 1px solid rgba(255, 105, 180, 0.4);
+      border-radius: 50px;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #ff69b4;
       letter-spacing: 1px;
     }
-    .deploy-sub {
-      font-size: 0.7rem;
-      color: #ff9ebe;
+
+    .status-dot {
+      width: 8px; height: 8px;
+      background: #ff69b4;
+      border-radius: 50%;
+      animation: statusPulse 2s infinite;
     }
 
-    /* features 3 cols */
-    .feature-trio {
+    @keyframes statusPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.6); }
+      50% { box-shadow: 0 0 0 6px rgba(255, 105, 180, 0); }
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .stat-card {
+      background: rgba(30, 12, 45, 0.65);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 105, 180, 0.2);
+      border-radius: 16px;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent, #ff69b4), transparent);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 105, 180, 0.5);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 105, 180, 0.15);
+    }
+
+    .stat-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.8rem;
+      background: linear-gradient(135deg, var(--accent, #ff69b4), var(--accent2, #ff1493));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .stat-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: rgba(255, 220, 240, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+    }
+
+    .main-card {
+      background: rgba(20, 8, 35, 0.75);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 105, 180, 0.3);
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      width: 100%;
+      max-width: 900px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .main-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 4px;
+      background: linear-gradient(90deg, #ff69b4, #ff1493, #ff85b3, #ff69b4);
+      background-size: 300% 100%;
+      animation: gradientSlide 4s linear infinite;
+    }
+
+    @keyframes gradientSlide {
+      0% { background-position: 0% 0; }
+      100% { background-position: 300% 0; }
+    }
+
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.2rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: rgba(255, 220, 240, 0.9);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .buttons-container {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
       width: 100%;
-      max-width: 1100px;
-      margin: 1rem 0;
     }
-    .feature-box {
-      background: rgba(20, 8, 30, 0.65);
-      border-radius: 1.8rem;
+
+    .action-btn {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding: 2rem 1.5rem;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 105, 180, 0.25);
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .action-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--btn-color1, rgba(255, 105, 180, 0.12)), var(--btn-color2, rgba(255, 20, 147, 0.12)));
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .action-btn:hover::before { opacity: 1; }
+
+    .action-btn:hover {
+      transform: translateY(-8px);
+      border-color: var(--btn-border, rgba(255, 105, 180, 0.7));
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 40px var(--btn-glow, rgba(255, 105, 180, 0.25));
+    }
+
+    .btn-icon-wrap {
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--btn-color1, rgba(255, 105, 180, 0.25)), var(--btn-color2, rgba(255, 20, 147, 0.25)));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-icon-wrap i {
+      font-size: 1.5rem;
+      color: var(--btn-icon, #ff69b4);
+    }
+
+    .btn-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-desc {
+      font-size: 0.8rem;
+      color: rgba(255, 220, 240, 0.6);
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .action-btn.primary {
+      --btn-color1: rgba(255, 105, 180, 0.2);
+      --btn-color2: rgba(255, 20, 147, 0.2);
+      --btn-border: rgba(255, 105, 180, 0.6);
+      --btn-glow: rgba(255, 105, 180, 0.3);
+      --btn-icon: #ff69b4;
+      border-color: rgba(255, 105, 180, 0.4);
+      animation: cardPulse 3s infinite;
+    }
+
+    .action-btn.secondary {
+      --btn-color1: rgba(255, 20, 147, 0.2);
+      --btn-color2: rgba(219, 112, 147, 0.2);
+      --btn-border: rgba(255, 20, 147, 0.6);
+      --btn-glow: rgba(255, 20, 147, 0.3);
+      --btn-icon: #ff1493;
+    }
+
+    .action-btn.tertiary {
+      --btn-color1: rgba(219, 112, 147, 0.2);
+      --btn-color2: rgba(255, 105, 180, 0.2);
+      --btn-border: rgba(219, 112, 147, 0.6);
+      --btn-glow: rgba(219, 112, 147, 0.3);
+      --btn-icon: #ff85b3;
+    }
+
+    @keyframes cardPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 105, 180, 0.25); }
+      50% { box-shadow: 0 0 0 8px rgba(255, 105, 180, 0); }
+    }
+
+    .deploy-section {
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .deploy-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .deploy-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.2rem 1.5rem;
+      background: rgba(30, 12, 45, 0.65);
+      backdrop-filter: blur(15px);
+      border: 1px solid var(--deploy-border, rgba(255, 105, 180, 0.2));
+      border-radius: 14px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .deploy-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--deploy-color, #ff69b4), transparent);
+    }
+
+    .deploy-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--deploy-color, #ff69b4);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3), 0 0 25px var(--deploy-glow, rgba(255, 105, 180, 0.15));
+    }
+
+    .deploy-icon {
+      width: 50px; height: 50px;
+      border-radius: 12px;
+      background: var(--deploy-bg, rgba(255, 105, 180, 0.15));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .deploy-icon i {
+      font-size: 1.4rem;
+      color: var(--deploy-color, #ff69b4);
+    }
+
+    .deploy-icon img {
+      width: 24px;
+      height: 24px;
+      filter: brightness(0) invert(1);
+    }
+
+    .deploy-info {
+      flex: 1;
+    }
+
+    .deploy-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #fff;
+      margin-bottom: 3px;
+    }
+
+    .deploy-desc {
+      font-size: 0.75rem;
+      color: rgba(255, 220, 240, 0.5);
+    }
+
+    .deploy-arrow {
+      color: var(--deploy-color, #ff69b4);
+      font-size: 0.9rem;
+      opacity: 0;
+      transform: translateX(-5px);
+      transition: all 0.3s ease;
+    }
+
+    .deploy-card:hover .deploy-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .features-section {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .feature-card {
+      background: rgba(30, 12, 45, 0.55);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 105, 180, 0.15);
+      border-radius: 16px;
       padding: 1.5rem;
       text-align: center;
-      border: 1px solid rgba(255, 105, 180, 0.25);
-      backdrop-filter: blur(8px);
-      transition: all 0.2s;
+      transition: all 0.3s ease;
     }
-    .feature-box:hover {
-      border-color: #ff69b4;
-      transform: scale(1.02);
+
+    .feature-card:hover {
+      border-color: rgba(255, 105, 180, 0.4);
+      transform: translateY(-3px);
     }
+
     .feature-icon {
-      font-size: 2.2rem;
-      background: linear-gradient(135deg, #FFA6C9, #ff3388);
+      font-size: 2rem;
+      margin-bottom: 0.8rem;
+      background: linear-gradient(135deg, #ff69b4, #ff1493);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      margin-bottom: 0.8rem;
-    }
-    .feature-title {
-      font-family: 'Orbitron', monospace;
-      font-size: 0.9rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      color: #ffc6dd;
     }
 
-    footer {
-      text-align: center;
-      padding: 1.5rem 0;
-      border-top: 1px solid rgba(255, 105, 180, 0.3);
-      width: 100%;
-      max-width: 1100px;
+    .feature-title {
+      font-family: 'Orbitron', sans-serif;
       font-size: 0.8rem;
-      color: #ffb0ca;
+      letter-spacing: 1.5px;
+      margin-bottom: 0.5rem;
+      color: #fff;
     }
-    footer a {
+
+    .feature-desc {
+      font-size: 0.8rem;
+      color: rgba(255, 220, 240, 0.55);
+      line-height: 1.4;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 1.5rem;
+      width: 100%;
+      max-width: 900px;
+      border-top: 1px solid rgba(255, 105, 180, 0.15);
+      color: rgba(255, 220, 240, 0.5);
+      font-size: 0.85rem;
+    }
+
+    .footer a {
       color: #ff69b4;
       text-decoration: none;
-      font-weight: 600;
+      transition: color 0.3s;
     }
 
-    @media (max-width: 800px) {
-      .stats-grid { grid-template-columns: repeat(2,1fr); gap: 1rem; }
-      .feature-trio { grid-template-columns: 1fr; }
-      .main-title { font-size: 2.5rem; letter-spacing: 2px; }
-      .glass-panel { padding: 1.5rem; }
+    .footer a:hover { color: #ff1493; }
+
+    @media (max-width: 768px) {
+      .title { font-size: 2rem; letter-spacing: 3px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .buttons-container { grid-template-columns: 1fr; }
+      .features-section { grid-template-columns: 1fr; }
+      .deploy-grid { grid-template-columns: 1fr; }
+      .stat-value { font-size: 1.4rem; }
+      .hero-section { padding: 2rem 1rem 1rem; }
+      .main-card { padding: 2rem 1.5rem; }
     }
-    @media (max-width: 550px) {
-      .stats-grid { grid-template-columns: 1fr; }
-      .action-panel { flex-direction: column; }
-      .main-title { font-size: 2rem; }
+
+    @media (max-width: 480px) {
+      .title { font-size: 1.6rem; letter-spacing: 2px; }
+      .logo-ring { width: 90px; height: 90px; }
+      .logo-icon { font-size: 2.2rem; }
+      .stats-grid { gap: 0.8rem; }
+      .stat-card { padding: 1rem 0.8rem; }
     }
   </style>
 </head>
 <body>
-  <div class="pink-haze"></div>
-  <div class="glow-pink-bubbles">
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
+  <div class="bg-overlay"></div>
+  <div class="glowing-bg">
+    <div class="glow-circle"></div>
+    <div class="glow-circle"></div>
+    <div class="glow-circle"></div>
+    <div class="glow-circle"></div>
   </div>
-  <div class="glam-overlay"></div>
+  <div class="scan-lines"></div>
+  <canvas class="particle-canvas" id="particles"></canvas>
 
-  <div class="page-container">
-    <div class="hero-glow">
-      <div class="maya-badge">
-        <i class="fas fa-crown" style="margin-right: 6px;"></i> MAYA-XMD
+  <div class="page-wrapper">
+    <section class="hero-section">
+      <div class="logo-container">
+        <div class="logo-ring">
+          <div class="logo-icon"><i class="fas fa-crown"></i></div>
+        </div>
       </div>
-      <h1 class="main-title">MAYA-XMD</h1>
-      <div class="sub-glow">✦ HYPER SESSION GENERATOR ✦</div>
-      <div class="status-ring">
-        <div class="status-dot-pink"></div>
-        <span id="liveStatus">ACTIVE · MODE</span>
-        <i class="fas fa-heart" style="font-size: 10px; margin-left: 6px; color:#ff69b4;"></i>
+      <h1 class="title">MAYA-XMD</h1>
+      <p class="tagline">Next-Gen Session Generator ✦ Pink Edition</p>
+      <div class="status-badge">
+        <span class="status-dot"></span>
+        <span id="serverStatus">ALL SYSTEMS PINK & OPERATIONAL</span>
       </div>
-    </div>
+    </section>
 
-    <!-- stats glam -->
     <div class="stats-grid">
-      <div class="stat-card-pink">
-        <div class="stat-icon-pink"><i class="fas fa-bolt"></i></div>
-        <div class="stat-number">1.2M+</div>
+      <div class="stat-card" style="--accent: #ff69b4; --accent2: #ff1493;">
+        <div class="stat-icon"><i class="fas fa-bolt"></i></div>
+        <div class="stat-value">1.2M+</div>
         <div class="stat-label">Active Sessions</div>
       </div>
-      <div class="stat-card-pink">
-        <div class="stat-icon-pink"><i class="fas fa-globe"></i></div>
-        <div class="stat-number">99.9%</div>
+      <div class="stat-card" style="--accent: #ff69b4; --accent2: #ff1493;">
+        <div class="stat-icon"><i class="fas fa-globe"></i></div>
+        <div class="stat-value">99.9%</div>
         <div class="stat-label">Uptime SLA</div>
       </div>
-      <div class="stat-card-pink">
-        <div class="stat-icon-pink"><i class="fas fa-rocket"></i></div>
-        <div class="stat-number">200ms</div>
+      <div class="stat-card" style="--accent: #ff69b4; --accent2: #ff1493;">
+        <div class="stat-icon"><i class="fas fa-rocket"></i></div>
+        <div class="stat-value">200ms</div>
         <div class="stat-label">Lightning Pair</div>
       </div>
-      <div class="stat-card-pink">
-        <div class="stat-icon-pink"><i class="fas fa-shield-alt"></i></div>
-        <div class="stat-number">AES-256</div>
+      <div class="stat-card" style="--accent: #ff69b4; --accent2: #ff1493;">
+        <div class="stat-icon"><i class="fas fa-shield-alt"></i></div>
+        <div class="stat-value">AES-256</div>
         <div class="stat-label">Encrypted Link</div>
       </div>
     </div>
 
-    <!-- main action buttons : pair code, qr, github -->
     <div class="main-card">
       <h2 class="section-title">Get Started</h2>
       <div class="buttons-container">
-        <a href="/pair" class="action-btn primary" style="--btn-color1: rgba(255, 105, 180, 0.25); --btn-color2: rgba(255, 20, 147, 0.25); --btn-border: rgba(255, 105, 180, 0.6); --btn-glow: rgba(255, 105, 180, 0.3); --btn-icon: #ff69b4;">
+        <a href="/pair" class="action-btn primary">
           <div class="btn-icon-wrap"><i class="fas fa-link"></i></div>
           <span class="btn-title">Pair Code</span>
           <span class="btn-desc">Connect with your phone number</span>
         </a>
-        <a href="/qr" target="_blank" class="xmd-btn">
-          <div class="btn-circle"><i class="fas fa-qrcode"></i></div>
-          <span class="btn-label">QR PAIRING</span>
-          <span class="btn-desc">SCAN QR</span>
+        <a href="/qr" target="_blank" class="action-btn secondary">
+          <div class="btn-icon-wrap"><i class="fas fa-qrcode"></i></div>
+          <span class="btn-title">QR Scan</span>
+          <span class="btn-desc">Scan QR code to connect</span>
         </a>
-      </div>
-    </div>
-        <a href="https://github.com/smiletech12/Maya-xmd/fork" target="_blank" class="xmd-btn">
-          <div class="btn-circle"><i class="fab fa-github"></i></div>
-          <span class="btn-label">SOURCE CODE</span>
-          <span class="btn-desc">Fork on GitHub</span>
+        <a href="https://github.com/vinpink2/MAYA-XMD/fork" target="_blank" class="action-btn tertiary">
+          <div class="btn-icon-wrap"><i class="fab fa-github"></i></div>
+          <span class="btn-title">Source Code</span>
+          <span class="btn-desc">View the project on GitHub</span>
         </a>
       </div>
     </div>
 
-    <!-- feature row (stylish pink description) -->
-    <div class="feature-trio">
-      <div class="feature-box">
+    <div class="features-section">
+      <div class="feature-card">
         <div class="feature-icon"><i class="fas fa-magic"></i></div>
         <div class="feature-title">ULTRA-FAST PAIRING</div>
-        <p style="font-size: 0.75rem; color:#ffb7cf; margin-top: 8px;">One tap connection with secure handshake</p>
+        <div class="feature-desc">One tap connection with secure handshake</div>
       </div>
-      <div class="feature-box">
+      <div class="feature-card">
         <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
         <div class="feature-title">REAL-TIME METRICS</div>
-        <p style="font-size: 0.75rem; color:#ffb7cf; margin-top: 8px;">Monitor session performance in vivid style</p>
+        <div class="feature-desc">Monitor session performance in vivid style</div>
       </div>
-      <div class="feature-box">
+      <div class="feature-card">
         <div class="feature-icon"><i class="fas fa-palette"></i></div>
         <div class="feature-title">PINK AESTHETIC</div>
-        <p style="font-size: 0.75rem; color:#ffb7cf; margin-top: 8px;">Custom glow effects & neon vibes</p>
+        <div class="feature-desc">Custom glow effects & neon vibes</div>
       </div>
     </div>
 
-    <!-- deploy / hosting links area (stylish for MAYA-XMD ecosystem) -->
-    <div class="deploy-special">
-      <div class="section-head" style="font-size: 1rem; margin-bottom: 1rem;">✦ DEPLOY YOUR INSTANCE ✦</div>
-      <div class="deploy-grid-pink">
-        <a href="#" class="deploy-item" id="herokuClone">
-          <div class="deploy-icon"><i class="fab fa-cloud-upload-alt"></i></div>
-          <div class="deploy-text">
-            <div class="deploy-title">HEROKU / RAILWAY</div>
-            <div class="deploy-sub">One-click deploy template</div>
-          </div>
-          <i class="fas fa-chevron-right" style="color:#ff69b4;"></i>
-        </a>
-        <a href="#" class="deploy-item" id="replitMock">
-          <div class="deploy-icon"><i class="fab fa-replit"></i></div>
-          <div class="deploy-text">
-            <div class="deploy-title">REPLIT / CODESPACE</div>
-            <div class="deploy-sub">Run instantly in browser</div>
-          </div>
-          <i class="fas fa-chevron-right" style="color:#ff69b4;"></i>
-        </a>
-        <a href="#" class="deploy-item" id="dockerMock">
-          <div class="deploy-icon"><i class="fab fa-docker"></i></div>
-          <div class="deploy-text">
-            <div class="deploy-title">DOCKER HUB</div>
-            <div class="deploy-sub">Containerized MAYA-XMD</div>
-          </div>
-          <i class="fas fa-chevron-right" style="color:#ff69b4;"></i>
-        </a>
-      </div>
-    </div>
-
-    <footer>
-      <p><i class="fas fa-heart" style="color:#ff69b4;"></i> MAYA-XMD · <i class="fas fa-heart" style="color:#ff69b4;"></i> | <a href="https://github.com/smiletech12/Maya-xmd" target="_blank">Official Repository</a> | Encrypted by design</p>
-      <p style="margin-top: 8px;">⚡ SESSION GENERATOR ⚡</p>
+    <footer class="footer">
+      <p>MAYA-XMD &copy; 2025 | <a href="https://github.com/vinpink2/MAYA-XMD" target="_blank">GitHub</a> | Secure Connection | Pink Edition ✧</p>
     </footer>
   </div>
 
-  <!-- Particle animation with pink/soft particles for extra stylishness -->
-  <canvas id="pinkCanvas" style="position: fixed; top:0; left:0; width:100%; height:100%; pointer-events: none; z-index: 2;"></canvas>
   <script>
-    (function() {
-      const canvas = document.getElementById('pinkCanvas');
-      if(!canvas) return;
-      const ctx = canvas.getContext('2d');
-      let width = window.innerWidth;
-      let height = window.innerHeight;
-      let particlesArray = [];
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
 
-      function resizeCanvas() {
-        width = window.innerWidth;
-        height = window.innerHeight;
-        canvas.width = width;
-        canvas.height = height;
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    class Particle {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.5;
+        this.speedY = (Math.random() - 0.5) * 0.5;
+        this.opacity = Math.random() * 0.5 + 0.1;
+        this.color = ['rgba(255,105,180,', 'rgba(255,20,147,', 'rgba(219,112,147,'][Math.floor(Math.random() * 3)];
       }
-      window.addEventListener('resize', resizeCanvas);
-      resizeCanvas();
-
-      class SoftParticle {
-        constructor() {
-          this.x = Math.random() * width;
-          this.y = Math.random() * height;
-          this.size = Math.random() * 2.5 + 0.6;
-          this.speedX = (Math.random() - 0.5) * 0.4;
-          this.speedY = (Math.random() - 0.5) * 0.3;
-          this.opacity = Math.random() * 0.4 + 0.15;
-          this.color = `rgba(255, ${Math.floor(105 + Math.random() * 90)}, ${Math.floor(180 + Math.random() * 75)}, `;
-        }
-        update() {
-          this.x += this.speedX;
-          this.y += this.speedY;
-          if(this.x < -20) this.x = width + 10;
-          if(this.x > width + 20) this.x = -20;
-          if(this.y < -20) this.y = height + 10;
-          if(this.y > height + 20) this.y = -20;
-        }
-        draw() {
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
-          ctx.fillStyle = this.color + this.opacity + ')';
-          ctx.fill();
-        }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
       }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color + this.opacity + ')';
+        ctx.fill();
+      }
+    }
 
-      for(let i=0;i<100;i++) particlesArray.push(new SoftParticle());
+    for (let i = 0; i < 80; i++) particles.push(new Particle());
 
-      function connectLines() {
-        for(let i=0;i<particlesArray.length;i++) {
-          for(let j=i+1;j<particlesArray.length;j++) {
-            let dx = particlesArray[i].x - particlesArray[j].x;
-            let dy = particlesArray[i].y - particlesArray[j].y;
-            let distance = Math.sqrt(dx*dx + dy*dy);
-            if(distance < 110) {
-              ctx.beginPath();
-              ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
-              ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
-              const alpha = 0.08 * (1 - distance/110);
-              ctx.strokeStyle = `rgba(255, 105, 180, ${alpha+0.04})`;
-              ctx.lineWidth = 0.7;
-              ctx.stroke();
-            }
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = 'rgba(255, 105, 180, ' + (0.08 * (1 - dist / 120)) + ')';
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
           }
         }
       }
-
-      function animate() {
-        if(!ctx) return;
-        ctx.clearRect(0,0,width,height);
-        for(let p of particlesArray) {
-          p.update();
-          p.draw();
-        }
-        connectLines();
-        requestAnimationFrame(animate);
-      }
-      animate();
-    })();
-
-    // dynamic status ping & interactive alerts for deploy mockups (just stylish alerts)
-    const statusSpan = document.getElementById('liveStatus');
-    if(statusSpan) {
-      let states = ["🟣 ACTIVE. ENERGY ONLINE", "✨ READY TO PAIR", "🌸 MAYA-XMD READY"];
-      let idx = 0;
-      setInterval(() => {
-        idx = (idx+1) % states.length;
-        statusSpan.innerText = states[idx];
-      }, 3800);
+      requestAnimationFrame(animateParticles);
     }
 
-    // adding interactive feedback to deploy items (demo experience)
-    const deployItems = document.querySelectorAll('.deploy-item');
-    deployItems.forEach(item => {
-      item.addEventListener('click', (e) => {
-        e.preventDefault();
-        alert("✨ MAYA-XMD deployment portal: Connect your repository or use template. [Demo Interactive] ✨\n deployment coming soon!");
-      });
-    });
-    // source / action buttons demo friendly hints
-    const actionBtns = document.querySelectorAll('.xmd-btn');
-    actionBtns.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        if(btn.getAttribute('href') === '/pair' || btn.getAttribute('href') === '/qr') {
-          e.preventDefault();
-          
-        }
-      });
-    });
+    animateParticles();
+
+    // Dynamic status text rotation
+    const statusSpan = document.getElementById('serverStatus');
+    if(statusSpan) {
+      const states = ["PINK MODE ACTIVE", "ALL SYSTEMS PINK", "READY TO PAIR", "MAYA-XMD ONLINE"];
+      let idx = 0;
+      setInterval(() => {
+        idx = (idx + 1) % states.length;
+        statusSpan.innerText = states[idx];
+      }, 4000);
+    }
   </script>
 </body>
 </html>
