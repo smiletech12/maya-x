@@ -1,9 +1,9 @@
 {
-  "name": "JUNE-X Session",
-  "description": "JUNE-X WhatsApp Session Generator - Next-Gen Pairing Service",
+  "name": "MAYA-XMD Session",
+  "description": "MAYA-XMD WhatsApp Session Generator - Next-Gen Pairing Service",
   "logo": "https://files.catbox.moe/lu3bqk.jpg",
-  "repository": "https://github.com/vinpink2/JUNE-X",
-  "keywords": ["whatsapp", "session", "pairing", "june-x"],
+  "repository": "https://github.com/smiletech12/Maya-xmd",
+  "keywords": ["whatsapp", "session", "pairing", "Maya-xmd"],
   "success_url": "/",
   "buildpacks": [
     { "url": "https://github.com/heroku/heroku-buildpack-nodejs#latest" }
