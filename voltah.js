@@ -114,7 +114,7 @@ app.use('/', async (req, res, next) => {
 });
 
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`JUNE-X Session Server running on http://0.0.0.0:${PORT}`);
+    console.log(`MAYA-XMD Session Server running on http://0.0.0.0:${PORT}`);
 });
 
 module.exports = app;
